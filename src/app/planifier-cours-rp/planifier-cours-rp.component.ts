@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursService } from '../services/cours.service';
-import { Classes, Dta, Module, Profs, Root, Semestre } from '../models/Root';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+
+import { Classes, Cours, Module, Profs, Root, Semestre } from '../models/Root';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { initFlowbite } from 'flowbite';
+import { CoursService } from 'src/app/services/cours.service';
 
 @Component({
   selector: 'app-planifier-cours-rp',
@@ -14,9 +16,14 @@ export class PlanifierCoursRpComponent implements OnInit {
   semestres!: Semestre[]
   professeurs!: Profs[];
   classes!: Classes[];
+  cours!: Cours[]
   ngOnInit() {
     this.getAllNeed();
+    initFlowbite();
   }
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
 
   constructor(private courseService: CoursService, private fb: FormBuilder) {
   }
@@ -27,30 +34,31 @@ export class PlanifierCoursRpComponent implements OnInit {
         this.semestres = data.data.semestres
         this.modules = data.data.modules
         this.professeurs = data.data.professeurs
+        this.cours = data.data.cours
         this.classes = data.data.classes
       }
     )
   }
 
   planForm: FormGroup = this.fb.group({
-    module_id: [''],
-    professeur_id: [''],
-    semestre_id: [''],
-    nbr_heures: [''],
-    classe_ids: ['']
+    module_id: ['', [Validators.required]],
+    professeur_id: ['', [Validators.required]],
+    semestre_id: ['', [Validators.required]],
+    nbr_heures: ['', [Validators.required, Validators.min(10)]],
+    classe_ids: [[], [Validators.required]],
+    etat: ['EnAttente'],
   });
 
-  get classe_id() {
-    return this.planForm.controls["classe_ids"] as FormArray;
-  }
-
   add() {
-    return this.courseService.add("cours", this.planForm.value).subscribe(
+    return this.courseService.add<Root<Cours>>("cours", this.planForm.value).subscribe(
       val => {
         console.log(val);
+        if (val.code == 200) {
+          this.cours.unshift(val.data);
+          this.planForm.reset();
+        }
       }
     )
-
   }
 
   selectClasse(e: any) {
@@ -58,4 +66,14 @@ export class PlanifierCoursRpComponent implements OnInit {
     this.planForm.get('classe_ids')?.patchValue(e);
   }
 
+  filtre!: string
+  pagination(event: any) {
+    this.page = event;
+    this.getAllNeed();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.getAllNeed();
+  }
 }

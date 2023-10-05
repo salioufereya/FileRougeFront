@@ -25,6 +25,7 @@ export interface Dta {
     modules: Module[]
     professeurs: Profs[]
     classes: Classes[]
+    cours: Cours[]
 }
 
 export interface Semestre {
@@ -46,3 +47,26 @@ export interface Classes {
     id: number
     libelle: string
 }
+
+
+// export interface Root {
+//     code: number
+//     message: string
+//     data: Daum[]
+//   }
+  
+  export interface Cours{
+    id: number
+    semestre: string
+    module: string
+    professeur: string
+    etat: string
+    classes: Class[]
+  }
+  
+  export interface Class {
+    id: number
+    classe: string
+    effectif: number
+    nombre_heures: number
+  }
