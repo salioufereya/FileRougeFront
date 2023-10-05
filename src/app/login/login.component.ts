@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService, private fb: FormBuilder, private router: Router) {
   }
   login() {
+    this.router.navigate(['/appNav']);
+    console.log("heho");
 
     return this.loginService.login<Root<Data>>(this.loginForm.value).subscribe(
       (x: Root<Data>) => {

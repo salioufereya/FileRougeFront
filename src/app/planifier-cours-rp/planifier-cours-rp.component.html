@@ -1,0 +1,252 @@
+<div class="sm:px-6 w-full">
+    <div class="px-4 md:px-10 py-4 md:py-7">
+        <div class="flex items-center justify-between">
+            <p tabindex="0"
+                class="focus:outline-none text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
+                Listes des Cours</p>
+            <div
+                class="py-2 px-4 flex items-center text-sm font-medium leading-none text-gray-600 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded">
+                <p>Filtrer par Module:</p>
+                <select aria-label="select" class="rounded-md">
+                    <option class="text-sm text-indigo-800">JS</option>
+                    <option class="text-sm text-indigo-800">Java</option>
+                    <option class="text-sm text-indigo-800">Figma</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
+        <div class="sm:flex items-center justify-between">
+            <div class="flex items-center">
+                <a class="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
+                    href=" javascript:void(0)">
+                    <div class="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
+                        <p>All</p>
+                    </div>
+                </a>
+                <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
+                    href="javascript:void(0)">
+                    <div class="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                        <p>Done</p>
+                    </div>
+                </a>
+                <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
+                    href="javascript:void(0)">
+                    <div class="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                        <p>Pending</p>
+                    </div>
+                </a>
+            </div>
+            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded">
+                <p class="text-sm font-medium leading-none text-white">Add Task</p>
+            </button>
+            <!-- Modal toggle -->
+
+        </div>
+        <div class="mt-7 overflow-x-auto flex justify-center">
+            <table class="w-2/3 whitespace-nowrap">
+                <thead tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                    <th> Module</th>
+                    <th>Semestre</th>
+                    <th>Professeur</th>
+                    <th>Etat</th>
+                    <th>Classes</th>
+                </thead>
+                <tbody>
+                    <tr tabindex="0" class="focus:outline-none h-16 border border-gray-100 rounded">
+                        <td class="">
+                            <div class="flex items-center pl-5">
+                                <p class="text-base font-medium leading-none text-gray-700 mr-2">Marketing Keynote
+                                    Presentation</p>
+                            </div>
+                        </td>
+                        <td class="pl-24">
+                            <div class="flex items-center">
+                                <p class="text-sm leading-none text-gray-600 ml-2">Urgent</p>
+                            </div>
+                        </td>
+                        <td class="pl-5">
+                            <div class="flex items-center">
+
+                                <p class="text-sm leading-none text-gray-600 ml-2">04/07</p>
+                            </div>
+                        </td>
+
+                        <td class="pl-5">
+                            <div class="flex items-center">
+
+                                <p class="text-sm leading-none text-gray-600 ml-2">04/07</p>
+                            </div>
+                        </td>
+                        <td class="pl-5">
+                            <button
+                                class="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">Due
+                                today at 18:00</button>
+                        </td>
+
+                    </tr>
+                    <tr class="h-3"></tr>
+                    <tr tabindex="0" class="focus:outline-none  h-16 border border-gray-100 rounded">
+                        <td class="focus:text-indigo-600 ">
+                            <div class="flex items-center pl-5">
+                                <p class="text-base font-medium leading-none text-gray-700 mr-2">UX Wireframes</p>
+                            </div>
+                        </td>
+                        <td class="pl-24">
+                            <div class="flex items-center">
+
+                                <p class="text-sm leading-none text-gray-600 ml-2">Urgent</p>
+                            </div>
+                        </td>
+                        <td class="pl-5">
+                            <div class="flex items-center">
+
+                                <p class="text-sm leading-none text-gray-600 ml-2">04/07</p>
+                            </div>
+                        </td>
+
+                        <td class="pl-5">
+                            <div class="flex items-center">
+                                <p class="text-sm leading-none text-gray-600 ml-2">04/07</p>
+                            </div>
+                        </td>
+                        <td class="pl-5">
+                            <button
+                                class="py-3 px-6 focus:outline-none text-sm leading-none text-gray-700 bg-gray-100 rounded">Due
+                                on 21.02.21</button>
+                        </td>
+
+                    </tr>
+                    <tr class="h-3"></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Main modal -->
+<div id="defaultModal" tabindex="-1" aria-hidden="true"
+    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <form action="" [formGroup]="planForm" (ngSubmit)="add()">
+        <div class="relative w-full max-w-2xl max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="max-w-full w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+                    <div class="grid  gap-8 grid-cols-1">
+                        <div class="flex flex-col ">
+                            <div class="flex flex-col sm:flex-row items-center">
+                                <h2 class="font-semibold text-lg mr-auto">Plannification cours</h2>
+                                <div class="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0"></div>
+                            </div>
+                            <div class="mt-5">
+                                <div class="form">
+                                    <div class="md:space-y-2 mb-3">
+                                        <label class="cursor-pointer ">
+                                            <span
+                                                class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Browse</span>
+                                            <input type="file" class="hidden" :multiple="multiple" :accept="accept">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="md:flex flex-row md:space-x-4 w-full text-xs">
+                                    <div class="w-full flex flex-col mb-3">
+                                        <label class="font-semibold text-gray-600 py-1">Module<abbr
+                                                title="required">*</abbr></label>
+                                        <select formControlName="module_id"
+                                            class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                                            required="required" name="integration[city_id]" id="integration_city_id">
+                                            <option value="">Choisir la module</option>
+                                            <option [value]="item.id" *ngFor="let item of modules">{{item.libelle}}
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                    <div class="mb-3 space-y-2 w-full text-xs">
+                                        <label class="font-semibold text-gray-600 py-2">Nombre d'heure <abbr
+                                                title="required">*</abbr></label>
+                                        <input placeholder="nombre d'heures" formControlName="nbr_heures"
+                                            class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                                            required="required" type="number">
+                                        <p class="text-red text-xs hidden">Please fill out this field.</p>
+                                    </div>
+
+                                </div>
+                                <div class="mb-3 space-y-2 h-24 w-full text-xs">
+                                    <label class=" font-semibold text-gray-600 py-2">Choisir classe(s)</label>
+                                    <div class="flex flex-wrap items-stretch w-full h-10 mb-4 relative">
+                                        <ng-select bindLabel="name" bindValue="id" [multiple]="true"
+                                             (change)="selectClasse($event)"
+                                            [closeOnSelect]="false"
+                                            class="flex-shrink flex-grow flex-auto leading-normal w-full    rounded-lg  relative focus:border-blue focus:shadow">
+                                            <ng-option *ngFor="let car of classes"
+                                                [value]="car.id">{{car.libelle}}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
+                                    <div class="w-full flex flex-col mb-3">
+                                        <label class="font-semibold text-gray-600 py-2">Professeur<abbr
+                                                title="required">*</abbr></label>
+                                        <select formControlName="professeur_id"
+                                            class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                                            required="required" name="integration[city_id]" id="integration_city_id">
+                                            <option value="">Choisir le professeur</option>
+                                            <option [value]="item.id" *ngFor="let item of professeurs">{{item.libelle}}
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                    <div class="w-full flex flex-col mb-3">
+                                        <label class="font-semibold text-gray-600 py-2">Semestre<abbr
+                                                title="required">*</abbr></label>
+                                        <select formControlName="semestre_id"
+                                            class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                                            required="required" name="integration[city_id]" id="integration_city_id">
+                                            <option value="" selected>Choisir la Semestre</option>
+                                            <option [value]="item.id" *ngFor="let item of semestres">{{item.libelle}}
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="flex items-center  justify-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button data-modal-hide="defaultModal" type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Ajouter</button>
+                <button data-modal-hide="defaultModal" type="button"
+                    class="text-white bg-red-700  focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Fermer</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<style>
+    .checkbox:checked+.check-icon {
+        display: flex;
+    }
+</style>
+<script>function dropdownFunction(element) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        let list = element.parentElement.parentElement.getElementsByClassName("dropdown-content")[0];
+        list.classList.add("target");
+        for (i = 0; i < dropdowns.length; i++) {
+            if (!dropdowns[i].classList.contains("target")) {
+                dropdowns[i].classList.add("hidden");
+            }
+        }
+        list.classList.toggle("hidden");
+    }</script>
