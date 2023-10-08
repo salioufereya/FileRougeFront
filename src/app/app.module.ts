@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, TemplateRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,8 +12,24 @@ import { PlanifierCoursRpComponent } from './planifier-cours-rp/planifier-cours-
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FiltreCoursPipe } from './shared/filtre-cours.pipe';
+import { CalendrierComponent } from './calendrier/calendrier.component';
+import { CalendarDateFormatter, CalendarModule, CalendarNativeDateFormatter, DateAdapter, DateFormatterParams } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localfr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-session-rp.component';
+registerLocaleData(localfr, 'fr');
 
+class CustomDateFormatter extends CalendarNativeDateFormatter {
+  public override dayViewHour({ date, locale }: DateFormatterParams): string {
+    return new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: 'numeric', second: 'numeric' }).format(date)
+  }
+  public override weekViewHour({ date, locale }: DateFormatterParams): string {
+    return new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: 'numeric', second: 'numeric' }).format(date)
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +37,9 @@ import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-se
     DashboardComponent,
     NavComponent,
     PlanifierCoursRpComponent,
-    FiltreCoursPipe,
     PlanifierSessionRpComponent,
+    FiltreCoursPipe,
+    CalendrierComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,9 +48,21 @@ import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-se
     ReactiveFormsModule,
     NgSelectModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    BrowserAnimationsModule,
+
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+      progressBar: true
+    }),
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [],
+  providers: [
+    { provide: CalendarDateFormatter, useClass: CustomDateFormatter }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

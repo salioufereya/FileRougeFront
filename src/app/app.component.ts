@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 
 @Component({
@@ -10,6 +11,8 @@ export class AppComponent {
   title = 'FileRougeFront';
   ngOnInit(): void {
     initFlowbite();
+  }
+  constructor(private router: ActivatedRoute, public roter: Router) {
   }
 }
 

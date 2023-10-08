@@ -1,1 +1,8 @@
-<app-nav></app-nav>
+
+<ng-container *ngIf="roter.url !=='/' && roter.url!=='/login'">
+    <app-nav></app-nav>
+</ng-container>
+<ng-container  *ngIf="roter.url =='/login'">
+    <router-outlet></router-outlet>
+
+</ng-container>

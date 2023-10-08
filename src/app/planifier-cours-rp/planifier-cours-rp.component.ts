@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Classes, Cours, Module, Profs, Root, Semestre } from '../models/Root';
+import { Classes, Cours, Module, Profs, Root, Semestre } from '../../app/models/Root';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { CoursService } from 'src/app/services/cours.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-planifier-cours-rp',
@@ -23,9 +24,14 @@ export class PlanifierCoursRpComponent implements OnInit {
   }
   page: number = 1;
   count: number = 0;
-  tableSize: number = 5;
+  tableSize: number = 3;
 
-  constructor(private courseService: CoursService, private fb: FormBuilder) {
+  constructor(private courseService: CoursService, private fb: FormBuilder, private toastr: ToastrService) {
+  }
+
+
+  showSuccess() {
+    this.toastr.success('Cours planifié avec success!');
   }
 
   getAllNeed() {
@@ -55,7 +61,9 @@ export class PlanifierCoursRpComponent implements OnInit {
         console.log(val);
         if (val.code == 200) {
           this.cours.unshift(val.data);
+          this.showSuccess();
           this.planForm.reset();
+
         }
       }
     )

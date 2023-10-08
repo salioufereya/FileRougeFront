@@ -26,6 +26,7 @@ export interface Dta {
     professeurs: Profs[]
     classes: Classes[]
     cours: Cours[]
+    salles: Salles[]
 }
 
 export interface Semestre {
@@ -47,6 +48,11 @@ export interface Classes {
     id: number
     libelle: string
 }
+export interface Salles {
+    id: number
+    libelle: string
+    nbr_places: number
+}
 
 
 // export interface Root {
@@ -54,19 +60,45 @@ export interface Classes {
 //     message: string
 //     data: Daum[]
 //   }
-  
-  export interface Cours{
+
+export interface Cours {
     id: number
     semestre: string
     module: string
     professeur: string
     etat: string
     classes: Class[]
-  }
-  
-  export interface Class {
+}
+
+export interface Class {
     id: number
     classe: string
     effectif: number
     nombre_heures: number
-  }
+}
+
+
+
+
+//   export interface Root {
+//     code: number
+//     message: string
+//     data: Daum[]
+//   }
+
+export interface Session {
+    id: number
+    cours: string
+    date: string
+    heure_debut: string
+    heure_fin: string
+    etat: string
+    salle: string
+    professeur: string
+    classes: Class[]
+}
+
+export interface Class {
+    id: number
+    libelle: string
+}
