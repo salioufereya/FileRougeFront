@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { CoursService } from 'src/app/services/cours.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { DataSharedService } from '../services/data-shared.service';
 
 @Component({
   selector: 'app-planifier-cours-rp',
@@ -24,11 +26,16 @@ export class PlanifierCoursRpComponent implements OnInit {
   }
   page: number = 1;
   count: number = 0;
-  tableSize: number = 3;
+  tableSize: number = 5;
 
-  constructor(private courseService: CoursService, private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private courseService: CoursService, private fb: FormBuilder, private toastr: ToastrService, private router: Router, private sharedService: DataSharedService) {
   }
-
+  AddSession(e: any) {
+    this.sharedService.updateData(e);
+    const objetJSON = JSON.stringify(e);
+    localStorage.setItem("monObjet", objetJSON);
+    this.router.navigate(['/calendrier']);
+  }
 
   showSuccess() {
     this.toastr.success('Cours planifié avec success!');

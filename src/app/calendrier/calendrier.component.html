@@ -1,6 +1,6 @@
 <div class="flex flex-row h-[85vh]">
 
-  <div id="calendar-container" class="w-2/4">
+  <div id="calendar-container h-[80%]" class="w-3/4">
     <div class="flex items-center justify-evenly my-3 ">
       <div id="cal-boutons">
         <div id="cal-date-nav-boutons" class="flex">
@@ -43,8 +43,105 @@
       </mwl-calendar-day-view>
     </span>
   </div>
-  <div class="flex h-full w-full bg-slate-400 p-5">
-    <h2>Liste des cours à planier </h2>
+  <div class="flex  h-[80%] bg-gray-200 p-5">
+    <form [formGroup]="formCalendar" (ngSubmit)="add()">
+      <div class="p-6">
+        <select formControlName="cours_id"
+          class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-sm h-10 px-4 md:w-full "
+          required="required" name="integration[city_id]" id="integration_city_id">
+          <option value="">Choisir la module</option>
+          <option [value]="item.id" *ngFor="let item of cours">{{item.module}}
+          </option>
+        </select>
+        <div class="flex flex-col">
+          <label class="leading-loose">Professeur</label>
+          <input type="text" formControlName="professeur"
+            class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-sm focus:outline-none text-black">
+        </div>
+        <div>
+        </div>
+        <div class="flex flex-col">
+          <label class="leading-loose">Date</label>
+          <input type="date" formControlName="date"
+            class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+            placeholder="Optional">
+        </div>
+        <div class="flex items-center space-x-4">
+          <div class="flex flex-col">
+            <label class="leading-loose">Heure debut</label>
+            <div class="relative focus-within:text-gray-600 text-gray-400">
+              <input type="time" formControlName="heure_debut"
+                class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                placeholder="25/02/2020">
+              <div class="absolute left-3 top-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <label class="leading-loose">Heure final</label>
+            <div class="relative focus-within:text-gray-600 text-gray-400">
+              <input type="time" formControlName="heure_fin" (change)="search()"
+                class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                placeholder="26/02/2020">
+              <div class="absolute left-3 top-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex">
+
+          <div class="flex items-center mr-4">
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" value="" class="sr-only peer" (change)="check($event)">
+              <div
+                class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+              </div>
+              <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">En ligne</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="mb-3 space-y-2 h-24 w-full text-xs" *ngIf="!enLigne">
+          <label class=" font-semibold text-gray-600 py-2">Choisir classe(s)</label>
+          <div class="flex flex-wrap items-stretch w-full h-10 mb-4 relative">
+            <ng-select bindLabel="name" bindValue="id" [multiple]="true" [closeOnSelect]="false"
+              (change)="selectClasse($event)"
+              class="flex-shrink flex-grow flex-auto leading-normal w-full    rounded-lg  relative focus:border-blue focus:shadow">
+              <ng-option *ngFor="let car of classes" [value]="car">{{car.classe}}</ng-option>
+            </ng-select>
+          </div>
+        </div>
+        <div class="mb-3 space-y-2  w-full text-xs">
+          <label class=" font-semibold text-gray-600 py-2">La salle </label>
+          <select formControlName="salle_id" (change)="selectA($event)"
+            class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+            required="required" name="integration[city_id]" id="integration_city_id">
+            <option value="">Choisir la salle</option>
+            <option value="{{item.id}}" *ngFor="let item of salles">{{item.libelle}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+        <button data-modal-hide="top-right-modal" type="submit" [disabled]="formCalendar.invalid"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Planifier</button>
+        <button data-modal-hide="top-right-modal" type="button"
+          class="text-white bg-red-500  focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+      </div>
+    </form>
 
   </div>
 

@@ -20,6 +20,7 @@ import localfr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-session-rp.component';
+import { DataSharedService } from './services/data-shared.service';
 registerLocaleData(localfr, 'fr');
 
 class CustomDateFormatter extends CalendarNativeDateFormatter {

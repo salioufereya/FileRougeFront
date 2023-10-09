@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -14,5 +15,12 @@ export class AppComponent {
   }
   constructor(private router: ActivatedRoute, public roter: Router) {
   }
+
+  alertWithSuccess() {
+    Swal.fire("Ajoutée avec succès", "success");
+  }
+
+   
+  
 }
 

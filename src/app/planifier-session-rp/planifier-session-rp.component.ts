@@ -4,6 +4,7 @@ import { Cours, Dta, Root, Salles, Session } from '../models/Root';
 import { CoursService } from '../services/cours.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-planifier-session-rp',
@@ -18,6 +19,7 @@ export class PlanifierSessionRpComponent implements OnInit {
   ngOnInit() {
     this.all();
     this.AllNeed();
+    initFlowbite();
   }
   constructor(private sessionService: SessionService, private courseService: CoursService, private fb: FormBuilder, private toastr: ToastrService) {
   }
@@ -80,11 +82,11 @@ export class PlanifierSessionRpComponent implements OnInit {
   add() {
     console.log(this.formSession.value);
     this.sesion = {
-      cours: this.date?.value,
+      cours: this.cours.filter(e => e.id == this.cours_id?.value)[0].module,
       heure_debut: this.heure_debut?.value,
       heure_fin: this.heure_fin?.value,
       etat: this.etat?.value,
-      salle: this.salle_id?.value,
+      salle: this.salles.filter(e => e.id == this.salle_id?.value)[0].libelle,
       professeur: this.professeur?.value,
       date: this.date?.value,
       classes: this.classe_ids?.value
@@ -127,7 +129,6 @@ export class PlanifierSessionRpComponent implements OnInit {
     });
     console.log(this.classes);
     this.formSession.get('classe_ids')?.setValue(e)
-
   }
 
   select(e: Event) {
@@ -164,6 +165,7 @@ export class PlanifierSessionRpComponent implements OnInit {
     }
   }
 
+  
   verifyContent() {
   }
 
