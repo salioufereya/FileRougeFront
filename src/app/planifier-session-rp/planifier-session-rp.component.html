@@ -186,9 +186,8 @@
                     <div class="flex">
 
                         <div class="flex items-center mr-4">
-
                             <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" value="" class="sr-only peer" formControlName="presentiel"
+                                <input type="checkbox" value="" class="sr-only peer"
                                     (change)="check($event)">
                                 <div
                                     class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
@@ -210,18 +209,18 @@
                     </div>
                     <div class="mb-3 space-y-2 h-24 w-full text-xs" *ngIf="!enLigne">
                         <label class=" font-semibold text-gray-600 py-2">La salle </label>
-                        <select formArrayName="salle_id" (change)="selectA($event)"
+                        <select formControlName="salle_id" (change)="selectA($event)"
                             class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
                             required="required" name="integration[city_id]" id="integration_city_id">
                             <option value="">Choisir la salle</option>
-                            <option [value]="item.id" *ngFor="let item of salles">{{item.libelle}}
+                            <option value="{{item.id}}" *ngFor="let item of salles">{{item.libelle}}
                             </option>
                         </select>
                     </div>
 
                 </div>
                 <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="top-right-modal" type="submit"
+                    <button data-modal-hide="top-right-modal" type="submit" [disabled]="formSession.invalid"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Planifier</button>
                     <button data-modal-hide="top-right-modal" type="button"

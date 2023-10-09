@@ -29,13 +29,10 @@ export class PlanifierSessionRpComponent implements OnInit {
     heure_debut: ['', [Validators.required]],
     heure_fin: ['', [Validators.required]],
     salle_id: ['', [Validators.required]],
-    nbr_heures: ['', [Validators.required, Validators.min(10)]],
+    nbr_heures: [''],
     classe_ids: [[], [Validators.required]],
-    presentiel: ['', [Validators.required]],
-    etat: ['EnAttente'],
+    etat: ['enAttente'],
   });
-
-
 
   // Créez un getter pour chaque contrôle de formulaire
   get cours_id() {
@@ -78,19 +75,31 @@ export class PlanifierSessionRpComponent implements OnInit {
     return this.formSession.get('etat');
   }
 
+  sesion!: Session
+
   add() {
     console.log(this.formSession.value);
-
+    this.sesion = {
+      cours: this.date?.value,
+      heure_debut: this.heure_debut?.value,
+      heure_fin: this.heure_fin?.value,
+      etat: this.etat?.value,
+      salle: this.salle_id?.value,
+      professeur: this.professeur?.value,
+      date: this.date?.value,
+      classes: this.classe_ids?.value
+    }
+    return this.sessionService.add<Root<Dta>>("sessions", this.formSession.value).subscribe(data => {
+      console.log(data);
+      if (data.code === 200) {
+        this.sessions.unshift(this.sesion);
+      }
+    })
   }
-
-
-
-
   all() {
     return this.sessionService.all<Root<Session[]>>("sessions").subscribe(
       data => {
         this.sessions = data.data;
-        console.log(this.sessions);
       }
     )
   }
@@ -99,21 +108,15 @@ export class PlanifierSessionRpComponent implements OnInit {
       (data) => {
         this.cours = data.data.cours
         this.salles = data.data.salles
-        console.log(this.cours);
-        console.log(this.salles);
-
-
       }
     )
   }
   check(event: Event) {
     let even = event.target as HTMLInputElement
     this.enLigne = even.checked
-
   }
 
   classes: any
-
   effectif: number = 0;
 
   selectClasse(e: any) {
@@ -122,17 +125,16 @@ export class PlanifierSessionRpComponent implements OnInit {
     e.forEach((el: any) => {
       this.effectif += el.effectif;
     });
-    console.log(this.effectif);
+    console.log(this.classes);
+    this.formSession.get('classe_ids')?.setValue(e)
+
   }
 
   select(e: Event) {
     let event = e.target as HTMLInputElement
-    console.log(event.value);
     this.coures = this.cours.filter((e: any) => e.id == +event.value)
-    console.log(this.coures);
     this.classes = this.coures[0].classes;
     this.formSession.get('professeur')?.setValue(this.coures[0].professeur)
-    console.log(this.coures[0].professeur);
   }
 
   dataAny!: any
@@ -144,32 +146,25 @@ export class PlanifierSessionRpComponent implements OnInit {
       heure_fin: this.formSession.get('heure_fin')?.value,
       date: this.formSession.get('date')?.value
     }
-
     return this.courseService.add<Root<Dta>>("sessions/search", this.dataAny).subscribe(
       data => {
         console.log(data)
         if (data.code === 500) {
           this.toastr.error(data.message)
         }
-      }
-
-    )
+      })
   }
-
   selectA(event: Event) {
-    let even = event.target as HTMLInputElement
-    this.salle = this.salles.filter((e: any) => e.id = even.value);
-    this.formSession.get('salle_id')?.setValue(even.value)
-    console.log(this.salle);
-    if (this.salle[0].nbr_places > this.effectif) {
-      this.toastr.error("Cette salle n'est pas contenir cet effectif", 'Major error', { timeOut: 10000 })
+    let even = event.target as HTMLInputElement;
+    this.salle = this.salles.filter((e: any) => e.id === +even.value);
+    console.log(this.salle[0]?.id);
+    if (this.salle[0]?.nbr_places < this.effectif) {
+      this.toastr.error("Cette salle ne peut pas contenir cet effectif", '', { timeOut: 10000 });
+      even.value = "";
     }
-
   }
+
   verifyContent() {
-
-
-
   }
 
 

@@ -87,7 +87,7 @@ export interface Class {
 //   }
 
 export interface Session {
-    id: number
+    id?: number
     cours: string
     date: string
     heure_debut: string
