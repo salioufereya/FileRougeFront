@@ -1,4 +1,11 @@
 .selected-view {
-    background-color: #333; /* Change to your desired background color */
-    color: white; /* Change to your desired text color */
-  }
+  background-color: #333;
+  /* Change to your desired background color */
+  color: white;
+  /* Change to your desired text color */
+}
+
+
+.selected {
+  border: 2px solid black;
+}

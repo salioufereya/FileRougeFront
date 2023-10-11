@@ -25,7 +25,7 @@ export interface Dta {
     modules: Module[]
     professeurs: Profs[]
     classes: Classes[]
-    cours: Cours[]
+    cours: Cours[] 
     salles: Salles[]
 }
 

@@ -19,6 +19,7 @@ export class CalendrierComponent implements OnInit {
   daa: any = { "id": 1, "name": "diallo" };
   classes!: any
   monObjet: any
+  selectedButton: string = 'month';
   ngOnInit(): void {
     this.AllNeed()
     const objetJSON = localStorage.getItem("monObjet");
@@ -27,15 +28,16 @@ export class CalendrierComponent implements OnInit {
     this.formCalendar.get('professeur')?.setValue(this.monObjet.professeur)
     this.formCalendar.get('cours_id')?.setValue(this.monObjet.id)
     this.classes = this.monObjet.classes
-
     this.all();
+    this.affectClandar();
+
   }
   tab: any = [];
   salles!: Salles[]
   formCalendar!: FormGroup
   modules!: Module[];
   semestres!: Semestre[]
-  coures!: Classes[];
+  coures!: any;
   cours!: Cours[]
   viewDate: Date = new Date();
   view: CalendarView = CalendarView.Week
@@ -52,6 +54,12 @@ export class CalendrierComponent implements OnInit {
       end: new Date("2023-10-09T12:00:00"),
     }
     this.events.push(event1);
+
+    // 
+
+
+
+
     this.formCalendar = this.fb.group({
       cours_id: ['', [Validators.required]],
       professeur: ['', [Validators.required]],
@@ -111,12 +119,33 @@ export class CalendrierComponent implements OnInit {
       data => {
         this.sessions = data.data;
         console.log(this.sessions);
+        const events = this.sessions.map((item) => {
+          const startDateTime = new Date(`${item.date}T${item.heure_debut}`);
+          const endDateTime = new Date(`${item.date}T${item.heure_fin}`);
+          return {
+            title: item.cours,
+            start: startDateTime,
+            end: endDateTime
+          };
+        });
+        console.log(events);
+        this.events.push(...events);
       })
+  }
+
+
+  affectClandar() {
+
 
 
   }
 
-
+  select(e: Event) {
+    let event = e.target as HTMLInputElement
+    this.coures = this.cours.filter((e: any) => e.id == +event.value)
+    this.classes = this.coures[0].classes;
+    this.formCalendar.get('professeur')?.setValue(this.coures[0].professeur)
+  }
 
   effectif: number = 0;
   selectClasse(e: any) {
@@ -131,8 +160,22 @@ export class CalendrierComponent implements OnInit {
 
   setView(view: CalendarView) {
     this.view = view;
+    if (view === CalendarView.Month) {
+      this.selectedButton = 'month';
+    } else if (view === CalendarView.Week) {
+      this.selectedButton = 'week';
+    } else if (view === CalendarView.Day) {
+      this.selectedButton = 'day';
+    }
   }
-
+  selectedDateNavButton: string = 'today';
+  onDateNavButtonClick(buttonId: string) {
+    this.selectedDateNavButton = buttonId;
+    if (buttonId === 'previous') {
+    } else if (buttonId === 'today') {
+    } else if (buttonId === 'next') {
+    }
+  }
   AllNeed() {
     return this.courseService.getAllNeed().subscribe(
       (data) => {
@@ -142,15 +185,21 @@ export class CalendrierComponent implements OnInit {
     )
   }
   add() {
-    console.log(this.formCalendar.value);
-    return this.courseService.add<Root<Dta>>("sessions", this.formCalendar.value).subscribe(data => {
-      console.log(data);
+
+    return this.courseService.add<Root<Session>>("sessions", this.formCalendar.value).subscribe(data => {
       if (data.code === 200) {
         Swal.fire({
           icon: 'success',
           title: 'success...',
           text: 'Session ajouté avec succees!',
         })
+        const event1 = {
+          title: data.data.cours,
+          start: new Date(`${data.data.date}T${data.data.heure_debut}`),
+          end: new Date(`${data.data.date}T${data.data.heure_fin}`),
+        };
+        console.log(event1);
+        this.events.push(event1);
       }
     })
   }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import Swal from 'sweetalert2';
-
+import * as XLSX from 'xlsx'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

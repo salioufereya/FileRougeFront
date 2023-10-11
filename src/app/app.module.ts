@@ -21,6 +21,8 @@ import { registerLocaleData } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-session-rp.component';
 import { DataSharedService } from './services/data-shared.service';
+import { InscriptionComponent } from './inscription/inscription.component';
+
 registerLocaleData(localfr, 'fr');
 
 class CustomDateFormatter extends CalendarNativeDateFormatter {
@@ -41,6 +43,7 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     PlanifierSessionRpComponent,
     FiltreCoursPipe,
     CalendrierComponent,
+    InscriptionComponent,
   ],
   imports: [
     BrowserModule,

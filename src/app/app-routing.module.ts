@@ -5,11 +5,13 @@ import { PlanifierCoursRpComponent } from './planifier-cours-rp/planifier-cours-
 import { NavComponent } from './nav/nav.component';
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-session-rp.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'planifierCours', component: PlanifierCoursRpComponent },
   { path: 'planifierSessions', component: PlanifierSessionRpComponent },
+  { path: 'inscription', component: InscriptionComponent },
   { path: 'login', component: LoginComponent },
   { path: 'calendrier', component: CalendrierComponent },
   { path: 'appNav', component: NavComponent },

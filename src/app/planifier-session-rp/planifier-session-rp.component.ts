@@ -5,6 +5,8 @@ import { CoursService } from '../services/cours.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { initFlowbite } from 'flowbite';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-planifier-session-rp',
@@ -12,6 +14,12 @@ import { initFlowbite } from 'flowbite';
   styleUrls: ['./planifier-session-rp.component.css']
 })
 export class PlanifierSessionRpComponent implements OnInit {
+
+
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 7;
+
   sessions!: Session[];
   cours!: Cours[]
   salles!: Salles[]
@@ -98,10 +106,43 @@ export class PlanifierSessionRpComponent implements OnInit {
       }
     })
   }
+
+  annuler(e: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Voulez vous vraiment annulé cette session!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui!! !',
+      cancelButtonText: 'Non, annuler!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.sessionService.add("sessions/annuler", e).subscribe(data => {
+          console.log(data);
+        })
+        Swal.fire(
+          'Deleted!',
+          'Session annulée avec success.',
+          'success'
+        )
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
+  }
   all() {
     return this.sessionService.all<Root<Session[]>>("sessions").subscribe(
       data => {
         this.sessions = data.data;
+        console.log(this.sessions);
+
       }
     )
   }
@@ -165,10 +206,21 @@ export class PlanifierSessionRpComponent implements OnInit {
     }
   }
 
-  
+
   verifyContent() {
   }
 
-
+  filtre!: string
+  pagination(event: any) {
+    this.page = event;
+    this.AllNeed();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.AllNeed();
+  }
 }
+
+
 
