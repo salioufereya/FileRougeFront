@@ -22,7 +22,7 @@
             </div>
             <div class="flex flex-row items-center justify-center">
 
-                <label for="" class="mr-3 font-extrabold" >Année Scolaire</label>
+                <label for="" class="mr-3 font-extrabold">Année Scolaire</label>
                 <span class="bg-slate-200 w-32  h-8  font-bold shadow-md flex items-center justify-center rounded-sm">
                     2022
                 </span>
@@ -42,10 +42,10 @@
                         id="dropdown-user">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                Neil Sims
+                                {{user.prenom}}
                             </p>
                             <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                neil.sims@flowbite.com
+                                {{user.email}}
                             </p>
                         </div>
                         <ul class="py-1" role="none">
@@ -56,9 +56,9 @@
                             </li>
 
                             <li>
-                                <a href="#"
+                                <button href="#" type="button" (click)="loggout()"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Sign out</a>
+                                    role="menuitem">Se déconnecter</button>
                             </li>
                         </ul>
                     </div>

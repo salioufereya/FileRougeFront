@@ -102,3 +102,15 @@ export interface Class {
     id: number
     libelle: string
 }
+
+export interface Login {
+    code: number
+    message: string
+    data: LoginData
+    links: string
+  }
+  
+  export interface LoginData {
+    user: User
+    token: string
+  }

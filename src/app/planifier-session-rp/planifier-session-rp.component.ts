@@ -44,6 +44,7 @@ export class PlanifierSessionRpComponent implements OnInit {
     etat: ['enAttente'],
   });
 
+
   // Créez un getter pour chaque contrôle de formulaire
   get cours_id() {
     return this.formSession.get('cours_id');

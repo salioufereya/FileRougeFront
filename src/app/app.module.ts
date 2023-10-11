@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavComponent } from './nav/nav.component';
@@ -22,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-session-rp.component';
 import { DataSharedService } from './services/data-shared.service';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { AuthInterceptor } from './auth-interceptor.interceptor';
 
 registerLocaleData(localfr, 'fr');
 
@@ -65,7 +66,13 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [
-    { provide: CalendarDateFormatter, useClass: CustomDateFormatter }
+    { provide: CalendarDateFormatter, useClass: CustomDateFormatter },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+   
   ],
   bootstrap: [AppComponent]
 })
