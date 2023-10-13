@@ -34,6 +34,7 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     return new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: 'numeric', second: 'numeric' }).format(date)
   }
 }
+
 @NgModule({
   declarations: [
     AppComponent,

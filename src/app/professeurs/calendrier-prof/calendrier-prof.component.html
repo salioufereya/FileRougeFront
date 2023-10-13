@@ -1,0 +1,157 @@
+<div id="calendar-container h-[80%]" class="w-full">
+    <div class="flex flex-col items-center justify-between xl:justify-evenly">
+        <div id="cal-boutons" class="mb-3">
+            <div id="cal-date-nav-boutons" class="flex">
+                <button id="previous" (click)="onDateNavButtonClick('previous')" mwlCalendarPreviousView
+                    [(viewDate)]="viewDate" [view]="view" [class.selected]="selectedDateNavButton === 'previous'"
+                    class="bg-gradient-to-r  from-blue-400 to-blue-500 text-white px-4 py-2 rounded-lg mr-2">Précedante</button>
+                <button id="today" (click)="onDateNavButtonClick('today')"
+                    [class.selected]="selectedDateNavButton === 'today'" mwlCalendarToday [(viewDate)]="viewDate"
+                    class="bg-gradient-to-r from-blue-400 to-blue-500 text-white px-4 py-2 rounded-lg mr-2">Aujourd'hui</button>
+                <button id="next" (click)="onDateNavButtonClick('next')"
+                    [class.selected]="selectedDateNavButton === 'next'" mwlCalendarNextView [(viewDate)]="viewDate"
+                    [view]="view"
+                    class="bg-gradient-to-r from-blue-400 to-blue-500 text-white px-4 py-2 rounded-lg">Suivant</button>
+            </div>
+        </div>
+        <div id="cal-date-field" class="bg-blue-500 text-white px-4 mb-2 py-2 rounded-lg">
+            {{ viewDate | calendarDate:(view + 'ViewTitle') : 'fr' }}
+        </div>
+        <div id="cal-view-nav-butons" class="flex">
+            <button id="month" (click)="setView(CalendarView.Month)" [class.selected]="selectedButton === 'month'"
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-l-lg">Mois</button>
+            <button id="week" (click)="setView(CalendarView.Week)" [class.selected]="selectedButton === 'week'"
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2">Semaine</button>
+            <button id="day" (click)="setView(CalendarView.Day)" [class.selected]="selectedButton === 'day'"
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-r-lg">Jour</button>
+        </div>
+    </div>
+    <span [ngSwitch]="view" class="w-full">
+        <mwl-calendar-month-view [viewDate]="viewDate" *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate"
+            [events]="events" locale="fr" (eventClicked)="onEventClicked($event)" [excludeDays]="[0,6]">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view [viewDate]="viewDate" *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate"
+            [events]="events" locale="fr" [excludeDays]="[0,6]" [dayStartHour]="8" [dayEndHour]="16">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view [viewDate]="viewDate" *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate"
+            [events]="events" locale="fr" [dayStartHour]="8" [dayEndHour]="16">
+        </mwl-calendar-day-view>
+    </span>
+</div>
+
+
+<!-- Modal toggle -->
+
+<!-- Main modal -->
+<div *ngIf="expression"
+    class="fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <!-- component -->
+    <!--
+  UI Design Prototype
+  Link : https://dribbble.com/shots/10452538-React-UI-Components
+-->
+    <div class="min-h-screen bg-gray-100 bg-opacity-50 py-6 flex flex-col justify-center sm:py-12">
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+            <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+                <form action="" [formGroup]="annulForm" (ngSubmit)="demande()">
+                    <div class="max-w-md mx-auto">
+                        <div class="flex items-center space-x-5">
+                            <div
+                                class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+                                i</div>
+                            <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+                                <h2 class="leading-relaxed">Détails de la session</h2>
+                            </div>
+                            <button type="button" class=" absolute left-[80%] top-5" (click)="close()">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                        <div class="divide-y divide-gray-200">
+                            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                                <div class="flex flex-col">
+                                    <label class="leading-loose">Cours</label>
+                                    <input type="text"
+                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                        placeholder="{{titre}}">
+                                </div>
+                                <div class="hidden">
+                                    <input type="text" formControlName="id">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="leading-loose">Date</label>
+                                    <input type="text"
+                                        class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                        placeholder="{{date}}">
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <div class="flex flex-col">
+                                        <label class="leading-loose">Heure début</label>
+                                        <div class="relative focus-within:text-gray-600 text-gray-400">
+                                            <input type="text"
+                                                class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                placeholder="{{heure_debut}}">
+                                            <div class="absolute left-3 top-2">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label class="leading-loose">Heure fin</label>
+                                        <div class="relative focus-within:text-gray-600 text-gray-400">
+                                            <input type="text"
+                                                class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                                                placeholder="{{heure_fin}}">
+                                            <div class="absolute left-3 top-2">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-5" *ngIf="annulation">
+                                <div>
+                                    <input type="text" placeholder="saisir la modif d'annulation"
+                                        formControlName="motif"
+                                        class="rounded-md border border-gray-500 w-full py-5 text-center ">
+                                </div>
+                                <button type="submit"
+                                    class=" bg-green-700 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">
+                                    Envoyer
+                                </button>
+                            </div>
+                            <div class="pt-4 flex items-center space-x-4">
+                                <button (click)="annul()"
+                                    class=" bg-red-700 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">
+                                    Annuler
+                                </button>
+                                <button
+                                    class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">Démarrer</button>
+                                <button
+                                    class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

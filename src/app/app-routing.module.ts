@@ -6,15 +6,23 @@ import { NavComponent } from './nav/nav.component';
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-session-rp.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { AuthGuard } from './auth.guard';
+import { hasRoleGuard } from './has-role.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'planifierCours', component: PlanifierCoursRpComponent },
+  {
+    path: 'planifierCours', component: PlanifierCoursRpComponent, canActivate: [AuthGuard, hasRoleGuard],
+    data: {
+      role: 'RP',
+    }
+  },
   { path: 'planifierSessions', component: PlanifierSessionRpComponent },
   { path: 'inscription', component: InscriptionComponent },
   { path: 'login', component: LoginComponent },
   { path: 'calendrier', component: CalendrierComponent },
   { path: 'appNav', component: NavComponent },
+  { path: 'professeurs', loadChildren: () => import('./professeurs/professeurs.module').then(m => m.ProfesseursModule) },
 ];
 
 @NgModule({

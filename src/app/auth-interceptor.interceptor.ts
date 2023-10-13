@@ -6,17 +6,12 @@ import { Observable } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // Récupération du token d'authentification (à remplacer par votre code)
-    const token = 'mon-token-d-authentification';
-
-    // Ajout du token dans les entêtes de la requête
+    const token = localStorage.getItem('tkn');
     const authReq = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`
       }
     });
-
-    // Envoi de la requête avec les nouvelles entêtes
     return next.handle(authReq);
   }
 

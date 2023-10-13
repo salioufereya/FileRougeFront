@@ -14,7 +14,7 @@ export interface User {
     nom: string
     email: string
     prenom: string
-    role: string
+    role: string[] | string
 }
 
 
@@ -25,7 +25,7 @@ export interface Dta {
     modules: Module[]
     professeurs: Profs[]
     classes: Classes[]
-    cours: Cours[] 
+    cours: Cours[]
     salles: Salles[]
 }
 
@@ -108,9 +108,9 @@ export interface Login {
     message: string
     data: LoginData
     links: string
-  }
-  
-  export interface LoginData {
+}
+
+export interface LoginData {
     user: User
     token: string
-  }
+}

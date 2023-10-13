@@ -1,154 +1,160 @@
-<div class="font-extralight text-2xl">
-    <h1>Liste des cours</h1>
-</div>
+<div class="">
 
-<div class="flex justify-between">
-    <div class="relative inline-flex">
-        <select
-            class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-            <option>Choose a module</option>
-            <option *ngFor="let item of cours" value="{{item.id}}">{{item.module}}</option>
-        </select>
+
+    <div class="font-extralight text-2xl">
+        <h1>Liste des cours</h1>
     </div>
-    <div class="sm:flex items-center justify-between">
-        <div class="flex items-center">
-            <a class="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
-                href=" javascript:void(0)">
-                <div class="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
-                    <p>Tout</p>
-                </div>
-            </a>
-            <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
-                href="javascript:void(0)">
-                <div class="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
-                    <p>Terminé</p>
-                </div>
-            </a>
-            <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
-                href="javascript:void(0)">
-                <div class="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
-                    <p>En Cours</p>
-                </div>
-            </a>
+
+    <div class="flex justify-center  items-center lg:flex-row flex-col lg:justify-between    ">
+        <div class="relative inline-flex">
+            <select
+                class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                <option>Choose a module</option>
+                <option *ngFor="let item of cours" value="{{item.id}}">{{item.module}}</option>
+            </select>
+        </div>
+        <div class="sm:flex items-center justify-between">
+            <div class="flex items-center">
+                <a class="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800"
+                    href=" javascript:void(0)">
+                    <div class="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
+                        <p>Tout</p>
+                    </div>
+                </a>
+                <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
+                    href="javascript:void(0)">
+                    <div class="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                        <p>Terminé</p>
+                    </div>
+                </a>
+                <a class="rounded-full focus:outline-none focus:ring-2 focus:bg-indigo-50 focus:ring-indigo-800 ml-4 sm:ml-8"
+                    href="javascript:void(0)">
+                    <div class="py-2 px-8 text-gray-600 hover:text-indigo-700 hover:bg-indigo-100 rounded-full ">
+                        <p>En Cours</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div>
+            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-transparent border-0 cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro text-xs ease-soft-in tracking-tight-soft bg-gradient-to-tl from-blue-600 to-cyan-400 hover:scale-102 hover:shadow-soft-xs active:opacity-85 rounded">
+                <p class="text-sm font-medium leading-none text-white">Planifier</p>
+
+            </button>
         </div>
     </div>
-    <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
-        class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-transparent border-0 cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro text-xs ease-soft-in tracking-tight-soft bg-gradient-to-tl from-blue-600 to-cyan-400 hover:scale-102 hover:shadow-soft-xs active:opacity-85 rounded">
-        <p class="text-sm font-medium leading-none text-white">Planifier</p>
-
-    </button>
-</div>
-<div class="">
-    <div class="w-full lg:w-6/6">
-        <div class="shadow-md rounded my-6">
-            <table class="min-w-full divide-y divide-gray-200 overflow-x-auto">
-                <thead>
-                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left md:py-1">Module</th>
-                        <th class="py-3 px-6 text-left">Professeur</th>
-                        <th class="py-3 px-6 text-center">Classes</th>
-                        <th class="py-3 px-6 text-center">Nombres d'heures</th>
-                        <th class="py-3 px-6 text-center">Etat</th>
-                        <th class="py-3 px-6 text-center">Completion </th>
-                        <th class="py-3 px-6 text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-600 text-sm font-light">
-                    <tr class="border-b border-gray-200 hover:bg-gray-100" *ngFor="let item of cours | filtreCours:filtre | paginate
+    <div class="">
+        <div class="w-full lg:w-6/6">
+            <div class="shadow-md rounded my-6">
+                <table class="min-w-full divide-y divide-gray-200  bg-white overflow-x-auto">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left md:py-1">Module</th>
+                            <th class="py-3 px-6 text-left">Professeur</th>
+                            <th class="py-3 px-6 text-center">Classes</th>
+                            <th class="py-3 px-6 text-center">Nombres d'heures</th>
+                            <th class="py-3 px-6 text-center">Etat</th>
+                            <th class="py-3 px-6 text-center">Completion </th>
+                            <th class="py-3 px-6 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        <tr class="border-b border-gray-200 hover:bg-gray-100" *ngFor="let item of cours | filtreCours:filtre | paginate
                     : {
                         itemsPerPage: tableSize,
                         currentPage: page,
                         totalItems: count
                       };
                 let i = index">
-                        <td class="py-3 px-6 text-left whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
-                                        viewBox="0 0 48 48" style=" fill:#000000;">
-                                        <path fill="#80deea"
-                                            d="M24,34C11.1,34,1,29.6,1,24c0-5.6,10.1-10,23-10c12.9,0,23,4.4,23,10C47,29.6,36.9,34,24,34z M24,16	c-12.6,0-21,4.1-21,8c0,3.9,8.4,8,21,8s21-4.1,21-8C45,20.1,36.6,16,24,16z">
-                                        </path>
-                                        <path fill="#80deea"
-                                            d="M15.1,44.6c-1,0-1.8-0.2-2.6-0.7C7.6,41.1,8.9,30.2,15.3,19l0,0c3-5.2,6.7-9.6,10.3-12.4c3.9-3,7.4-3.9,9.8-2.5	c2.5,1.4,3.4,4.9,2.8,9.8c-0.6,4.6-2.6,10-5.6,15.2c-3,5.2-6.7,9.6-10.3,12.4C19.7,43.5,17.2,44.6,15.1,44.6z M32.9,5.4	c-1.6,0-3.7,0.9-6,2.7c-3.4,2.7-6.9,6.9-9.8,11.9l0,0c-6.3,10.9-6.9,20.3-3.6,22.2c1.7,1,4.5,0.1,7.6-2.3c3.4-2.7,6.9-6.9,9.8-11.9	c2.9-5,4.8-10.1,5.4-14.4c0.5-4-0.1-6.8-1.8-7.8C34,5.6,33.5,5.4,32.9,5.4z">
-                                        </path>
-                                        <path fill="#80deea"
-                                            d="M33,44.6c-5,0-12.2-6.1-17.6-15.6C8.9,17.8,7.6,6.9,12.5,4.1l0,0C17.4,1.3,26.2,7.8,32.7,19	c3,5.2,5,10.6,5.6,15.2c0.7,4.9-0.3,8.3-2.8,9.8C34.7,44.4,33.9,44.6,33,44.6z M13.5,5.8c-3.3,1.9-2.7,11.3,3.6,22.2	c6.3,10.9,14.1,16.1,17.4,14.2c1.7-1,2.3-3.8,1.8-7.8c-0.6-4.3-2.5-9.4-5.4-14.4C24.6,9.1,16.8,3.9,13.5,5.8L13.5,5.8z">
-                                        </path>
-                                        <circle cx="24" cy="24" r="4" fill="#80deea"></circle>
-                                    </svg>
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24"
+                                            viewBox="0 0 48 48" style=" fill:#000000;">
+                                            <path fill="#80deea"
+                                                d="M24,34C11.1,34,1,29.6,1,24c0-5.6,10.1-10,23-10c12.9,0,23,4.4,23,10C47,29.6,36.9,34,24,34z M24,16	c-12.6,0-21,4.1-21,8c0,3.9,8.4,8,21,8s21-4.1,21-8C45,20.1,36.6,16,24,16z">
+                                            </path>
+                                            <path fill="#80deea"
+                                                d="M15.1,44.6c-1,0-1.8-0.2-2.6-0.7C7.6,41.1,8.9,30.2,15.3,19l0,0c3-5.2,6.7-9.6,10.3-12.4c3.9-3,7.4-3.9,9.8-2.5	c2.5,1.4,3.4,4.9,2.8,9.8c-0.6,4.6-2.6,10-5.6,15.2c-3,5.2-6.7,9.6-10.3,12.4C19.7,43.5,17.2,44.6,15.1,44.6z M32.9,5.4	c-1.6,0-3.7,0.9-6,2.7c-3.4,2.7-6.9,6.9-9.8,11.9l0,0c-6.3,10.9-6.9,20.3-3.6,22.2c1.7,1,4.5,0.1,7.6-2.3c3.4-2.7,6.9-6.9,9.8-11.9	c2.9-5,4.8-10.1,5.4-14.4c0.5-4-0.1-6.8-1.8-7.8C34,5.6,33.5,5.4,32.9,5.4z">
+                                            </path>
+                                            <path fill="#80deea"
+                                                d="M33,44.6c-5,0-12.2-6.1-17.6-15.6C8.9,17.8,7.6,6.9,12.5,4.1l0,0C17.4,1.3,26.2,7.8,32.7,19	c3,5.2,5,10.6,5.6,15.2c0.7,4.9-0.3,8.3-2.8,9.8C34.7,44.4,33.9,44.6,33,44.6z M13.5,5.8c-3.3,1.9-2.7,11.3,3.6,22.2	c6.3,10.9,14.1,16.1,17.4,14.2c1.7-1,2.3-3.8,1.8-7.8c-0.6-4.3-2.5-9.4-5.4-14.4C24.6,9.1,16.8,3.9,13.5,5.8L13.5,5.8z">
+                                            </path>
+                                            <circle cx="24" cy="24" r="4" fill="#80deea"></circle>
+                                        </svg>
+                                    </div>
+                                    <span class="font-medium">{{item.module}}</span>
                                 </div>
-                                <span class="font-medium">{{item.module}}</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-6 text-left">
-                            <div class="flex items-center">
-                                <div class="mr-2">
-                                    <img class="w-6 h-6 rounded-full"
-                                        src="https://randomuser.me/api/portraits/men/1.jpg" />
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full"
+                                            src="https://randomuser.me/api/portraits/men/1.jpg" />
+                                    </div>
+                                    <span>{{item.professeur}}</span>
                                 </div>
-                                <span>{{item.professeur}}</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-6 text-center">
-                            <div class="flex items-center justify-center flex-col ">
-                                <div class=" text-black  " *ngFor=" let item of item.classes">
-                                    {{item.classe}}</div>
-                            </div>
-                        </td>
-                        <td class="py-3 px-6 text-center">
-                            <span class="  py-1 px-3 rounded-full text-xs">{{item.classes[0].nombre_heures}}</span>
-                        </td>
-                        <td class="py-3 px-6 text-center">
-                            <span
-                                class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">{{item.etat}}</span>
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                            <div class="flex items-center">
-                                <span class="mr-2">60%</span>
-                                <div class="relative w-full">
-                                    <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                                        <div style="width: 60%"
-                                            class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center flex-col ">
+                                    <div class=" text-black  " *ngFor=" let item of item.classes">
+                                        {{item.classe}}</div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <span class="  py-1 px-3 rounded-full text-xs">{{item.classes[0].nombre_heures}}</span>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <span
+                                    class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">{{item.etat}}</span>
+                            </td>
+                            <td
+                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                <div class="flex items-center">
+                                    <span class="mr-2">60%</span>
+                                    <div class="relative w-full">
+                                        <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
+                                            <div style="width: 60%"
+                                                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="py-3 px-6 text-center">
-                            <div class="flex item-center justify-center" (click)="AddSession(item)">
-                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-sm h-5 mr-2"
-                                    data-modal-target="top-left-modal" data-modal-toggle="top-left-modal">
-                                    planifier
-                                </button>
-                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                    </svg>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex item-center justify-center" (click)="AddSession(item)">
+                                    <button
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-sm h-5 mr-2"
+                                        data-modal-target="top-left-modal" data-modal-toggle="top-left-modal">
+                                        planifier
+                                    </button>
+                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
+                                    </div>
+                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </div>
                                 </div>
-                                <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="flex justify-center">
-    <pagination-controls previousLabel="Prédant" nextLabel="Suivant" (pageChange)="pagination($event)">
-    </pagination-controls>
-</div>
-
+    <div class="flex justify-center">
+        <pagination-controls previousLabel="Prédant" nextLabel="Suivant" (pageChange)="pagination($event)">
+        </pagination-controls>
+    </div>
 
 
 
@@ -156,111 +162,117 @@
 
 
 
-<!-- Main modal -->
-<div id="defaultModal" tabindex="-1" aria-hidden="true"
-    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <form action="" [formGroup]="planForm" (ngSubmit)="add()">
-        <div class="relative w-full max-w-2xl max-h-full">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <div class="max-w-full w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
-                    <div class="grid  gap-8 grid-cols-1">
-                        <div class="flex flex-col ">
-                            <div class="flex flex-col sm:flex-row items-center">
-                                <h2 class="font-semibold text-lg mr-auto">Plannification cours</h2>
-                                <div class="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0"></div>
-                            </div>
-                            <div class="mt-5">
-                                <div class="form">
-                                    <div class="md:space-y-2 mb-3">
-                                        <label class="cursor-pointer ">
-                                            <span
-                                                class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Browse</span>
-                                            <input type="file" class="hidden" :multiple="multiple" :accept="accept">
-                                        </label>
-                                    </div>
+
+    <!-- Main modal -->
+    <div id="defaultModal" tabindex="-1" aria-hidden="true"
+        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <form action="" [formGroup]="planForm" (ngSubmit)="add()">
+            <div class="relative w-full max-w-2xl max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div class="max-w-full w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+                        <div class="grid  gap-8 grid-cols-1">
+                            <div class="flex flex-col ">
+                                <div class="flex flex-col sm:flex-row items-center">
+                                    <h2 class="font-semibold text-lg mr-auto">Plannification cours</h2>
+                                    <div class="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0"></div>
                                 </div>
-                                <div class="md:flex flex-row md:space-x-4 w-full text-xs">
-                                    <div class="w-full flex flex-col mb-3">
-                                        <label class="font-semibold text-gray-600 py-1">Module<abbr
-                                                title="required">*</abbr></label>
-                                        <select formControlName="module_id"
-                                            class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                            required="required" name="integration[city_id]" id="integration_city_id">
-                                            <option value="">Choisir la module</option>
-                                            <option [value]="item.id" *ngFor="let item of modules">{{item.libelle}}
-                                            </option>
-                                        </select>
+                                <div class="mt-5">
+                                    <div class="form">
+                                        <div class="md:space-y-2 mb-3">
+                                            <label class="cursor-pointer ">
+                                                <span
+                                                    class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">Browse</span>
+                                                <input type="file" class="hidden" :multiple="multiple" :accept="accept">
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="md:flex flex-row md:space-x-4 w-full text-xs">
+                                        <div class="w-full flex flex-col mb-3">
+                                            <label class="font-semibold text-gray-600 py-1">Module<abbr
+                                                    title="required">*</abbr></label>
+                                            <select formControlName="module_id"
+                                                class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                                                required="required" name="integration[city_id]"
+                                                id="integration_city_id">
+                                                <option value="">Choisir la module</option>
+                                                <option [value]="item.id" *ngFor="let item of modules">{{item.libelle}}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                        <div class="mb-3 space-y-2 w-full text-xs">
+                                            <label class="font-semibold text-gray-600 py-2">Nombre d'heure <abbr
+                                                    title="required">*</abbr></label>
+                                            <input placeholder="nombre d'heures" formControlName="nbr_heures"
+                                                class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                                                required="required" type="number">
+                                            <p class="text-red text-xs hidden">Please fill out this field.</p>
+                                        </div>
+                                        <div class="hidden">
+                                            <input placeholder="nombre d'heures" formControlName="etat"
+                                                class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                                                required="required">
+                                            <p class="text-red text-xs hidden">Please fill out this field.</p>
+                                        </div>
 
                                     </div>
-                                    <div class="mb-3 space-y-2 w-full text-xs">
-                                        <label class="font-semibold text-gray-600 py-2">Nombre d'heure <abbr
-                                                title="required">*</abbr></label>
-                                        <input placeholder="nombre d'heures" formControlName="nbr_heures"
-                                            class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                            required="required" type="number">
-                                        <p class="text-red text-xs hidden">Please fill out this field.</p>
+                                    <div class="mb-3 space-y-2 h-24 w-full text-xs">
+                                        <label class=" font-semibold text-gray-600 py-2">Choisir classe(s)</label>
+                                        <div class="flex flex-wrap items-stretch w-full h-10 mb-4 relative">
+                                            <ng-select bindLabel="name" bindValue="id" [multiple]="true"
+                                                (change)="selectClasse($event)" [closeOnSelect]="false"
+                                                class="flex-shrink flex-grow flex-auto leading-normal w-full    rounded-lg  relative focus:border-blue focus:shadow">
+                                                <ng-option *ngFor="let car of classes"
+                                                    [value]="car.id">{{car.libelle}}</ng-option>
+                                            </ng-select>
+                                        </div>
                                     </div>
-                                    <div class="hidden">
-                                        <input placeholder="nombre d'heures" formControlName="etat"
-                                            class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-                                            required="required">
-                                        <p class="text-red text-xs hidden">Please fill out this field.</p>
-                                    </div>
-
-                                </div>
-                                <div class="mb-3 space-y-2 h-24 w-full text-xs">
-                                    <label class=" font-semibold text-gray-600 py-2">Choisir classe(s)</label>
-                                    <div class="flex flex-wrap items-stretch w-full h-10 mb-4 relative">
-                                        <ng-select bindLabel="name" bindValue="id" [multiple]="true"
-                                            (change)="selectClasse($event)" [closeOnSelect]="false"
-                                            class="flex-shrink flex-grow flex-auto leading-normal w-full    rounded-lg  relative focus:border-blue focus:shadow">
-                                            <ng-option *ngFor="let car of classes"
-                                                [value]="car.id">{{car.libelle}}</ng-option>
-                                        </ng-select>
-                                    </div>
-                                </div>
-                                <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
-                                    <div class="w-full flex flex-col mb-3">
-                                        <label class="font-semibold text-gray-600 py-2">Professeur<abbr
-                                                title="required">*</abbr></label>
-                                        <select formControlName="professeur_id"
-                                            class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                            required="required" name="integration[city_id]" id="integration_city_id">
-                                            <option value="">Choisir le professeur</option>
-                                            <option [value]="item.id" *ngFor="let item of professeurs">{{item.libelle}}
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="w-full flex flex-col mb-3">
-                                        <label class="font-semibold text-gray-600 py-2">Semestre<abbr
-                                                title="required">*</abbr></label>
-                                        <select formControlName="semestre_id"
-                                            class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
-                                            required="required" name="integration[city_id]" id="integration_city_id">
-                                            <option value="" selected>Choisir la Semestre</option>
-                                            <option [value]="item.id" *ngFor="let item of semestres">{{item.libelle}}
-                                            </option>
-                                        </select>
+                                    <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
+                                        <div class="w-full flex flex-col mb-3">
+                                            <label class="font-semibold text-gray-600 py-2">Professeur<abbr
+                                                    title="required">*</abbr></label>
+                                            <select formControlName="professeur_id"
+                                                class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                                                required="required" name="integration[city_id]"
+                                                id="integration_city_id">
+                                                <option value="">Choisir le professeur</option>
+                                                <option [value]="item.id" *ngFor="let item of professeurs">
+                                                    {{item.libelle}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="w-full flex flex-col mb-3">
+                                            <label class="font-semibold text-gray-600 py-2">Semestre<abbr
+                                                    title="required">*</abbr></label>
+                                            <select formControlName="semestre_id"
+                                                class="block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full "
+                                                required="required" name="integration[city_id]"
+                                                id="integration_city_id">
+                                                <option value="" selected>Choisir la Semestre</option>
+                                                <option [value]="item.id" *ngFor="let item of semestres">
+                                                    {{item.libelle}}
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div
+                    class="flex items-center  justify-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button data-modal-hide="defaultModal" type="submit" [disabled]="planForm.invalid"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Ajouter</button>
+                    <button data-modal-hide="defaultModal" type="button"
+                        class="text-white bg-red-700  focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Fermer</button>
+                </div>
             </div>
-            <div
-                class="flex items-center  justify-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button data-modal-hide="defaultModal" type="submit" [disabled]="planForm.invalid"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Ajouter</button>
-                <button data-modal-hide="defaultModal" type="button"
-                    class="text-white bg-red-700  focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Fermer</button>
-            </div>
-        </div>
-    </form>
+        </form>
 
+    </div>
 </div>
-
 <style>
     .checkbox:checked+.check-icon {
         display: flex;

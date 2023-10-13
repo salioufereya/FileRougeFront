@@ -27,10 +27,9 @@ export class LoginComponent implements OnInit {
         if (x.code === 200) {
           this.router.navigate(['/appNav']);
           console.log(x.data.user);
-          //  localStorage.setItem('tkn', x.data.user);
+          localStorage.setItem('tkn', x.data.token);
           // this.router.navigate(['/accueil'])
-          localStorage.setItem('usr', JSON.stringify(x.data.user));
-
+          localStorage.setItem('user', JSON.stringify(x.data.user));
         }
         else {
           console.log(x);

@@ -231,9 +231,4 @@ export class CalendrierComponent implements OnInit {
   searchProf() {
 
   }
-
-
-
-
-
 }

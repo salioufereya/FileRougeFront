@@ -13,13 +13,18 @@ export class NavComponent implements OnInit {
 
   }
   user!: User;
+  role!: string | string[];
   ngOnInit() {
-    if (localStorage.getItem('usr')) {
-      let ue = localStorage.getItem('usr');
+    if (localStorage.getItem('user')) {
+      let ue = localStorage.getItem('user');
       this.user = JSON.parse(ue!);
+      this.role = this.user.role;
+      console.log(this.role);
     }
   }
-
+  truePro: boolean = this.role == 'prof';
+ 
+  
   loggout() {
 
     Swal.fire({
@@ -32,7 +37,7 @@ export class NavComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        localStorage.removeItem('usr')
+        localStorage.removeItem('user')
         localStorage.removeItem('tkn')
         this.router.navigate(['/login'])
         Swal.fire(

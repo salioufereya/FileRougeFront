@@ -1,0 +1,42 @@
+<div class="flex flex-col w-full lg:flex-row">
+    <div class="w-full lg:w-2/5 mr-10">
+        <table class="w-full">
+            <thead>
+                <tr
+                    class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                    <th class="px-4 py-3">Cours</th>
+                    <th class="px-4 py-3">Type</th>
+                    <th class="px-4 py-3">heures</th>
+
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                <tr class="text-gray-700" *ngFor="let item of cours">
+                    <td class="px-4 py-3 border">
+                        <div class="flex items-center text-sm">
+                            <div class="relative w-8 h-8 mr-3 rounded-full md:block">
+                                <img class="object-cover w-full h-full rounded-full"
+                                    src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                                    alt="" loading="lazy" />
+                                <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-black">{{item.module}}</p>
+                                <p class="text-xs text-gray-600">Developer</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 text-xs border">
+                        <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                            {{item.etat}} </span>
+                    </td>
+                    <td class="px-4 py-3 text-sm border"> {{item.classes[0].nombre_heures}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="w-full lg:w-2/5">
+        <app-calendrier-prof></app-calendrier-prof>
+    </div>
+</div>
