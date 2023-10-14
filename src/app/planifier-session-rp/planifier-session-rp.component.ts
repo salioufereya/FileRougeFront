@@ -107,7 +107,7 @@ export class PlanifierSessionRpComponent implements OnInit {
       }
     })
   }
-
+  selected: string = "filtrer par module"
   annuler(e: any) {
     Swal.fire({
       title: 'Are you sure?',
@@ -127,14 +127,6 @@ export class PlanifierSessionRpComponent implements OnInit {
           'Session annulée avec success.',
           'success'
         )
-      } else if (
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        Swal.fire(
-          'Cancelled',
-          'Your imaginary file is safe :)',
-          'error'
-        )
       }
     })
   }
@@ -143,10 +135,15 @@ export class PlanifierSessionRpComponent implements OnInit {
       data => {
         this.sessions = data.data;
         console.log(this.sessions);
-
       }
     )
   }
+  isTerminated: boolean = false;
+  toggleTerminated() {
+    this.isTerminated = !this.isTerminated;
+  }
+  selectedState: string = '';
+  
   AllNeed() {
     return this.courseService.getAllNeed().subscribe(
       (data) => {
@@ -159,7 +156,9 @@ export class PlanifierSessionRpComponent implements OnInit {
     let even = event.target as HTMLInputElement
     this.enLigne = even.checked
   }
-
+  filterByState(state: string) {
+    this.selectedState = state;
+  }
   classes: any
   effectif: number = 0;
 

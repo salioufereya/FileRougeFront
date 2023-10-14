@@ -65,6 +65,7 @@ export interface Cours {
     id: number
     semestre: string
     module: string
+    photo?: string
     professeur: string
     etat: string
     classes: Class[]
@@ -89,6 +90,7 @@ export interface Class {
 export interface Session {
     id?: number
     cours: string
+    photo?: string
     date: string
     heure_debut: string
     heure_fin: string

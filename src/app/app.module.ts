@@ -23,6 +23,7 @@ import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-se
 import { DataSharedService } from './services/data-shared.service';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { AuthInterceptor } from './auth-interceptor.interceptor';
+import { FiltrerByStatePipe } from './shared/filtrer-by-state.pipe';
 
 registerLocaleData(localfr, 'fr');
 
@@ -46,6 +47,7 @@ class CustomDateFormatter extends CalendarNativeDateFormatter {
     FiltreCoursPipe,
     CalendrierComponent,
     InscriptionComponent,
+    FiltrerByStatePipe,
   ],
   imports: [
     BrowserModule,

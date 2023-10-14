@@ -30,6 +30,7 @@ export class PlanifierCoursRpComponent implements OnInit {
 
   constructor(private courseService: CoursService, private fb: FormBuilder, private toastr: ToastrService, private router: Router, private sharedService: DataSharedService) {
   }
+  selected: string = "filtrer par module";
   AddSession(e: any) {
     this.sharedService.updateData(e);
     const objetJSON = JSON.stringify(e);

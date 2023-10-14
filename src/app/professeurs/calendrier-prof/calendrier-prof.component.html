@@ -53,31 +53,32 @@
     <div class="min-h-screen bg-gray-100 bg-opacity-50 py-6 flex flex-col justify-center sm:py-12">
         <div class="relative py-3 sm:max-w-xl sm:mx-auto">
             <div class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
-                <form action="" [formGroup]="annulForm" (ngSubmit)="demande()">
-                    <div class="max-w-md mx-auto">
-                        <div class="flex items-center space-x-5">
-                            <div
-                                class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
-                                i</div>
-                            <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
-                                <h2 class="leading-relaxed">Détails de la session</h2>
-                            </div>
-                            <button type="button" class=" absolute left-[80%] top-5" (click)="close()">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
 
-                            </button>
-
+                <div class="max-w-md mx-auto">
+                    <div class="flex items-center space-x-5">
+                        <div
+                            class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono">
+                            i</div>
+                        <div class="block pl-2 font-semibold text-xl self-start text-gray-700">
+                            <h2 class="leading-relaxed">Détails de la session</h2>
                         </div>
+                        <button type="button" class=" absolute left-[80%] top-5" (click)="close()">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
 
-                        <div class="divide-y divide-gray-200">
+                        </button>
+
+                    </div>
+
+                    <div class="divide-y divide-gray-200">
+                        <form action="" [formGroup]="annulForm" (ngSubmit)="demande()">
                             <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                                 <div class="flex flex-col">
                                     <label class="leading-loose">Cours</label>
-                                    <input type="text"
+                                    <input type="text" readonly
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="{{titre}}">
                                 </div>
@@ -86,7 +87,7 @@
                                 </div>
                                 <div class="flex flex-col">
                                     <label class="leading-loose">Date</label>
-                                    <input type="text"
+                                    <input type="text" readonly
                                         class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         placeholder="{{date}}">
                                 </div>
@@ -94,7 +95,7 @@
                                     <div class="flex flex-col">
                                         <label class="leading-loose">Heure début</label>
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
-                                            <input type="text"
+                                            <input type="text" readonly
                                                 class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                 placeholder="{{heure_debut}}">
                                             <div class="absolute left-3 top-2">
@@ -111,7 +112,7 @@
                                     <div class="flex flex-col">
                                         <label class="leading-loose">Heure fin</label>
                                         <div class="relative focus-within:text-gray-600 text-gray-400">
-                                            <input type="text"
+                                            <input type="text" readonly
                                                 class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                                 placeholder="{{heure_fin}}">
                                             <div class="absolute left-3 top-2">
@@ -133,24 +134,27 @@
                                         formControlName="motif"
                                         class="rounded-md border border-gray-500 w-full py-5 text-center ">
                                 </div>
-                                <button type="submit"
+                                <button type="submit" [disabled]="annulForm.invalid"
                                     class=" bg-green-700 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">
                                     Envoyer
                                 </button>
                             </div>
-                            <div class="pt-4 flex items-center space-x-4">
-                                <button (click)="annul()"
-                                    class=" bg-red-700 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">
-                                    Annuler
-                                </button>
-                                <button
-                                    class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">Démarrer</button>
-                                <button
-                                    class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">Fermer</button>
-                            </div>
+                        </form>
+                        <div class="pt-4 flex items-center space-x-4">
+                            <button (click)="annul()"
+                                class=" bg-red-700 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">
+                                Annuler
+                            </button>
+                            <form action="">
+                                <button type="submit" (click)="valideForm()"
+                                    class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">Valider</button>
+                            </form>
+                            <button (click)="close()"
+                                class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-2 rounded-md focus:outline-none">Fermer</button>
                         </div>
                     </div>
-                </form>
+                </div>
+
             </div>
         </div>
     </div>

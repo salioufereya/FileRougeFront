@@ -17,12 +17,25 @@ const routes: Routes = [
       role: 'RP',
     }
   },
-  { path: 'planifierSessions', component: PlanifierSessionRpComponent },
-  { path: 'inscription', component: InscriptionComponent },
+  { path: 'planifierSessions', component: PlanifierSessionRpComponent, canActivate: [AuthGuard, hasRoleGuard],
+  data: {
+    role: 'RP',
+  } },
+  { path: 'inscription', component: InscriptionComponent, canActivate: [AuthGuard, hasRoleGuard],
+  data: {
+    role: 'RP',
+  } },
   { path: 'login', component: LoginComponent },
-  { path: 'calendrier', component: CalendrierComponent },
+  { path: 'calendrier', component: CalendrierComponent, canActivate: [AuthGuard, hasRoleGuard],
+  data: {
+    role: 'RP',
+  } },
   { path: 'appNav', component: NavComponent },
-  { path: 'professeurs', loadChildren: () => import('./professeurs/professeurs.module').then(m => m.ProfesseursModule) },
+  { path: 'professeurs', loadChildren: () => import('./professeurs/professeurs.module').then(m => m.ProfesseursModule), canActivate: [AuthGuard, hasRoleGuard],
+  data: {
+    role: 'prof',
+  } },
+  { path: 'attach', loadChildren: () => import('./attach/attach.module').then(m => m.AttachModule) },
 ];
 
 @NgModule({

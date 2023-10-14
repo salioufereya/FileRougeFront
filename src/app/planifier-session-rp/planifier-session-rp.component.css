@@ -1,0 +1,18 @@
+/* Styles pour le bouton "Terminer" */
+.terminer-button {
+    background-color: rgb(67, 248, 67);
+    color: white;
+  }
+  
+  /* Styles pour le bouton "En cours" */
+  .encours-button {
+    background-color: rgb(54, 54, 234);
+    color: white;
+  }
+  
+  /* Styles par défaut pour les boutons inactifs */
+  .button-inactive {
+    background-color: rgb(243, 240, 240);
+    color: black;
+  }
+  

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { th } from 'date-fns/locale';
-import { Cours, Module, Semestre } from 'src/app/models/Root';
+import { Cours, Dta, Module, Root, Semestre } from 'src/app/models/Root';
 import { ProfesseurService } from '../services/professeur.service';
 
 @Component({
@@ -78,6 +78,16 @@ export class CalendrierProfComponent {
     this.annulation = true;
   }
 
+  valideForm() {
+    return this.profService.add<Root<Dta>>("sessions/terminer", { id: this.annulForm.value.id }).subscribe(data => {
+      console.log(data);
+      if (data.code == 200) {
+      }
+    })
+  }
+
+
+
   annulForm: FormGroup = this.fb.group({
     id: ['', [Validators.required]],
     motif: ['', Validators.required],
@@ -85,8 +95,11 @@ export class CalendrierProfComponent {
 
 
   demande() {
-    return this.profService.add("", this.annulForm.value).subscribe(data => {
+    return this.profService.add<Root<Dta>>("professeurs/session/demandeAnnulation", this.annulForm.value).subscribe(data => {
       console.log(data);
+      if (data.code == 200) {
+        this.annulForm.value.reset();
+      }
     })
   }
 }
