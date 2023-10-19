@@ -31,11 +31,15 @@ export class PlanifierCoursRpComponent implements OnInit {
   constructor(private courseService: CoursService, private fb: FormBuilder, private toastr: ToastrService, private router: Router, private sharedService: DataSharedService) {
   }
   selected: string = "filtrer par module";
+  selectedState: string = '';
   AddSession(e: any) {
     this.sharedService.updateData(e);
     const objetJSON = JSON.stringify(e);
     localStorage.setItem("monObjet", objetJSON);
     this.router.navigate(['/calendrier']);
+  }
+  filterByState(state: string) {
+    this.selectedState = state;
   }
 
   showSuccess() {

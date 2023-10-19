@@ -8,33 +8,43 @@ import { PlanifierSessionRpComponent } from './planifier-session-rp/planifier-se
 import { InscriptionComponent } from './inscription/inscription.component';
 import { AuthGuard } from './auth.guard';
 import { hasRoleGuard } from './has-role.guard';
+import { StudentComponent } from './planifier-session-rp/student/student.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'students', component: StudentComponent },
   {
     path: 'planifierCours', component: PlanifierCoursRpComponent, canActivate: [AuthGuard, hasRoleGuard],
     data: {
-      role: 'RP',
+      role: ['RP'],
     }
   },
-  { path: 'planifierSessions', component: PlanifierSessionRpComponent, canActivate: [AuthGuard, hasRoleGuard],
-  data: {
-    role: 'RP',
-  } },
-  { path: 'inscription', component: InscriptionComponent, canActivate: [AuthGuard, hasRoleGuard],
-  data: {
-    role: 'RP',
-  } },
+  {
+    path: 'planifierSessions', component: PlanifierSessionRpComponent, canActivate: [AuthGuard, hasRoleGuard],
+    data: {
+      role: ['RP'],
+    }
+  },
+  {
+    path: 'inscription', component: InscriptionComponent, canActivate: [AuthGuard, hasRoleGuard],
+    data: {
+      role: ['RP'],
+    }
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'calendrier', component: CalendrierComponent, canActivate: [AuthGuard, hasRoleGuard],
-  data: {
-    role: 'RP',
-  } },
+  {
+    path: 'calendrier', component: CalendrierComponent, canActivate: [AuthGuard, hasRoleGuard],
+    data: {
+      role: ['RP'],
+    }
+  },
   { path: 'appNav', component: NavComponent },
-  { path: 'professeurs', loadChildren: () => import('./professeurs/professeurs.module').then(m => m.ProfesseursModule), canActivate: [AuthGuard, hasRoleGuard],
-  data: {
-    role: 'prof',
-  } },
+  {
+    path: 'professeurs', loadChildren: () => import('./professeurs/professeurs.module').then(m => m.ProfesseursModule), canActivate: [AuthGuard, hasRoleGuard],
+    data: {
+      role: ['prof', 'RP']
+    }
+  },
   { path: 'attach', loadChildren: () => import('./attach/attach.module').then(m => m.AttachModule) },
 ];
 

@@ -14,17 +14,19 @@ export class hasRoleGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): boolean {
-    const isAuthorazed = this.authService.getUser() == next.data['role']
+    let roles = next.data['role'];
 
-    if (!isAuthorazed) {
+    let isAuthorized = roles.some((role: string) => role == this.authService.getUser());
+
+    if (!isAuthorized) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Vous n\'etes pas authorizé a consulter cette age',
-      })
+        text: 'Vous n\'êtes pas autorisé à consulter cette page',
+      });
+      return false; 
     }
-    return isAuthorazed;
+
+    return true; 
   }
 }
-
-;
